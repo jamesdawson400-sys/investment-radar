@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Scan {
+  id           Int      @id @default(autoincrement())
+  scanDate     String
+  universeSize Int
+  topScore     Float?
+  avgRet12m    Float?
+  notes        String?
+  createdAt    String   @default("")
+  ideas        Idea[]
+}
+
+model Idea {
+  id             Int    @id @default(autoincrement())
+  scanId         Int
+  ticker         String
+  name           String @default("")
+  sector         String @default("")
+  score          Float
+  momentumScore  Float
+  qualityScore   Float
+  valuationScore Float
+  trendScore     Float
+  price          Float  @default(0)
+  marketCap      Float?
+  ret1m          Float?
+  ret3m          Float?
+  ret12m         Float?
+  realizedVol    Float?
+  peRatio        Float?
+  rationale      String @default("")
+  riskSummary    String @default("")
+  createdAt      String @default("")
+  scan           Scan   @relation(fields: [scanId], references: [id])
+
+  @@index([scanId])
+  @@index([ticker])
+}
+
+model Watchlist {
+  id          Int    @id @default(autoincrement())
+  ticker      String @unique
+  name        String @default("")
+  addedDate   String
+  addedScore  Float
+  notes       String @default("")
+  active      Int    @default(1)
+  createdAt   String @default("")
+
+  @@index([ticker])
+}
+
+model Alert {
+  id         Int    @id @default(autoincrement())
+  timestamp  String
+  ticker     String
+  signalType String
+  message    String
+  scoreOld   Float?
+  scoreNew   Float?
+  createdAt  String @default("")
+
+  @@index([ticker])
+  @@index([timestamp])
+}
