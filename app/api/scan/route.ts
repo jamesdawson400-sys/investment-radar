@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { NextRequest, NextResponse } from "next/server";
 import { fetchUniverse } from "@/lib/yahoo-finance";
 import { scoreUniverse } from "@/lib/scoring";
