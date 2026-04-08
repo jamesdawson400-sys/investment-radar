@@ -8,9 +8,12 @@ import {
 interface Props {
   history: { date: string; close: number }[];
   ma50: number | null;
+  high52w?: number | null;
+  low52w?: number | null;
 }
 
-export default function PriceChart({ history, ma50 }: Props) {
+export default function PriceChart({ history, ma50, high52w, low52w }: Props) {
+  void high52w; void low52w;
   const data = useMemo(() => {
     if (!history || history.length === 0) return [];
     const ma50Window = 50;

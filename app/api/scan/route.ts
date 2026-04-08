@@ -1,4 +1,5 @@
 export const dynamic = "force-dynamic";
+export const maxDuration = 60; // seconds — requires Vercel Pro/Hobby allows up to 60s on edge
 import { NextRequest, NextResponse } from "next/server";
 import { fetchUniverse } from "@/lib/yahoo-finance";
 import { scoreUniverse } from "@/lib/scoring";

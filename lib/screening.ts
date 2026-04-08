@@ -31,7 +31,5 @@ export function sortResults(universe: ScoredTicker[], key: SortKey): ScoredTicke
 
 export const DEFAULT_UNIVERSE = [
   "AAPL", "MSFT", "GOOGL", "AMZN", "NVDA",
-  "META", "TSLA", "BRK-B", "JPM", "JNJ",
-  "V", "PG", "UNH", "HD", "MA",
-  "DIS",
+  "META", "TSLA", "JPM", "JNJ", "V",
 ];
