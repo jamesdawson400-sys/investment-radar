@@ -1,12 +1,13 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import dynamic from "next/dynamic";
 import ControlPanel, { type ScanParams } from "@/components/ControlPanel";
-import UniverseTab from "@/components/UniverseTab";
-import SecurityTab from "@/components/SecurityTab";
-import ConvictionTab from "@/components/ConvictionTab";
-import WatchlistTab from "@/components/WatchlistTab";
-import HistoryTab from "@/components/HistoryTab";
+const UniverseTab = dynamic(() => import("@/components/UniverseTab"), { ssr: false });
+const SecurityTab = dynamic(() => import("@/components/SecurityTab"), { ssr: false });
+const ConvictionTab = dynamic(() => import("@/components/ConvictionTab"), { ssr: false });
+const WatchlistTab = dynamic(() => import("@/components/WatchlistTab"), { ssr: false });
+const HistoryTab = dynamic(() => import("@/components/HistoryTab"), { ssr: false });
 import type { ScoredTicker } from "@/lib/scoring";
 import { Activity, BarChart2, Star, Bookmark, History, Zap } from "lucide-react";
 

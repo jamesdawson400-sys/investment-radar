@@ -41,7 +41,18 @@ async function safeFetch(url: string, ms = 7000): Promise<Response | null> {
   const timer = setTimeout(() => controller.abort(), ms);
   try {
     const res = await fetch(url, { headers: YF_HEADERS, signal: controller.signal });
-    return res.ok ? res : null;
+    if (res.ok) return res;
+    // Try query2 as fallback if query1 fails
+    if (url.includes("query1")) {
+      const url2 = url.replace("query1", "query2");
+      const ctrl2 = new AbortController();
+      const t2 = setTimeout(() => ctrl2.abort(), ms);
+      try {
+        const res2 = await fetch(url2, { headers: YF_HEADERS, signal: ctrl2.signal });
+        return res2.ok ? res2 : null;
+      } catch { return null; } finally { clearTimeout(t2); }
+    }
+    return null;
   } catch {
     return null;
   } finally {
